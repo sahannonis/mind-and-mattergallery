@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- DEMO: keep these pages out of search engines until the owner approves them. Remove this line when it goes live. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Mind & Matter Gallery | South Surrey, since 1966</title>
+<meta name="description" content="Art gallery in South Surrey since 1966. Home of Arnold Mikelson's wood sculptures, with work by local artists, on three acres of cedar gardens.">
+<meta name="theme-color" content="#6B1D24">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  } }
+</script>
+<style>
+  .hero{background:radial-gradient(ellipse 60% 70% at 70% 40%,#86313B 0%,var(--burgundy) 45%,#3E1015 100%);color:#F7EEE2;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:24px;align-items:center;min-height:clamp(560px,78vh,760px)}
+  .hero .kicker{font-size:18px;font-weight:700;color:#E7C9A6}
+  .hero h1{font-size:clamp(54px,7.4vw,104px);line-height:.95;margin-top:10px;color:#fff}
+  .hero p.lead{font-size:21px;color:#F1E2D3;max-width:32ch;margin-top:22px}
+  .hero .status{margin-top:22px;font-weight:700;color:#E7C9A6}
+  .stage{position:relative;height:clamp(420px,62vh,640px)}
+  #carve3d{position:absolute;inset:0;width:100%;height:100%;display:none;touch-action:pan-y;cursor:grab}
+  #carve3d:active{cursor:grabbing}
+  .stage.is-3d #carve3d{display:block}
+  .stage.is-3d .fallback{display:none}
+  .stage .fallback{position:absolute;inset:8% 14%;display:grid;place-items:center}
+  .stage-bar{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;align-items:center;gap:16px;pointer-events:none}
+  .stage-bar small{font-size:15px;color:#E3CBB8}
+  .stage:not(.is-3d) .stage-bar small{display:none}
+  .stage-bar .btn{pointer-events:auto;min-height:44px;font-size:16px;padding:8px 16px}
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;min-height:0;padding-top:28px;padding-bottom:44px}
+    .stage{height:400px;order:-1;margin:0 -18px}
+  }
+  .welcome{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+  @media (max-width:900px){.welcome{grid-template-columns:1fr;gap:36px}}
+  .visit-strip{background:var(--paper-2);border-top:1px solid var(--line)}
+  .visit-strip .wrap{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+  .facts{display:flex;flex-wrap:wrap;gap:14px 40px;margin-top:14px;font-size:20px}
+  .facts b{display:block;font-size:15px;color:var(--muted);font-weight:700}
+  @media (max-width:900px){.visit-strip .wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="demo" role="note">Demo made for Mind &amp; Matter Gallery by Sahan Nonis. This is not the official website. <a href="mailto:sahanconnor@gmail.com">Questions? Email me</a></div>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html"><b>Mind &amp; Matter Gallery</b><small>South Surrey, since 1966</small></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="site-nav"><span>Menu</span></button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="arnold.html">Arnold Mikelson</a>
+      <a href="gallery.html">The Gallery</a>
+      <a href="book.html">The Book &amp; News</a>
+      <a href="visit.html">Visit</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title" style="padding:0">
+  <div class="wrap">
+    <div>
+      <p class="kicker">South Surrey, since 1966</p>
+      <h1 id="hero-title">Mind &amp; Matter Gallery</h1>
+      <p class="lead">Sixty years of art among the cedars. Home of Arnold Mikelson's wood sculptures, with paintings, pottery and glass by local artists.</p>
+      <div class="actions">
+        <a class="btn light solid" href="visit.html">Plan your visit</a>
+        <a class="btn light" href="arnold.html">Meet Arnold Mikelson</a>
+      </div>
+      <p class="status" data-open-now>Open every day, 12 to 6 pm</p>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="carve3d" role="img" aria-label="A block of wood on a gallery plinth is carved away to reveal a wooden bird. Drag sideways to turn it."></canvas>
+      <div class="fallback"><figure class="frame "><img loading="lazy" src="https://mindandmatterart.com/assets/images/success.86160335_std.JPG" alt="Success, a wood sculpture by Arnold Mikelson"></figure></div>
+      <div class="stage-bar"><small>Drag to turn the carving</small><button class="btn light" id="replay" hidden>Watch it carved again</button></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap welcome">
+    <div class="prose">
+      <h2>Welcome to the gallery</h2>
+      <p class="lede">Arnold Mikelson built this A-frame gallery with his own hands and opened its doors in 1966.</p>
+      <p>Sixty years later, it still sits on three acres of gardens under the old cedars on 16th Avenue. Inside you'll find the largest collection of Arnold's wood sculptures, alongside original paintings, pottery, glass, ceramics and soapstone by local artists, all for sale.</p>
+      <p>His wife Mary has kept the doors open ever since, and she's often there to show visitors around.</p>
+      <div class="actions"><a class="btn solid" href="gallery.html">See the gallery</a></div>
+    </div>
+    <figure class="frame "><img loading="lazy" src="https://mindandmatterart.com/assets/images/gallery1.86161259_std.gif" alt="The Mind & Matter Gallery"><figcaption>The gallery on 16th Avenue</figcaption></figure>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <h2>Explore</h2>
+    <div class="paths">
+      <a class="path" href="arnold.html"><img loading="lazy" src="https://mindandmatterart.com/assets/images/photoalbum1.173161813_large.JPG" alt="A wood sculpture by Arnold Mikelson"><div><h3>Arnold Mikelson</h3><p>From Latvia to South Surrey: the life and work of the sculptor who built this gallery.</p><span>Read his story</span></div></a>
+      <a class="path" href="gallery.html"><img loading="lazy" src="https://mindandmatterart.com/assets/images/for_sale6.184194440_std.JPG" alt="Artwork for sale in the gallery"><div><h3>The Gallery</h3><p>The building, the gardens, the artists showing now, and forty years of the Festival of Arts.</p><span>Look around</span></div></a>
+      <a class="path" href="book.html"><img loading="lazy" src="https://mindandmatterart.com/assets/images/Book_Launch.98113327_std.jpg" alt="The book launch at the gallery"><div><h3>The Book &amp; News</h3><p>Mary Mikelson's memoir, <i>Mind and Matter: Life with Arnold Mikelson</i>, and the gallery in the news.</p><span>Read more</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="quote" aria-label="Arnold Mikelson's guiding idea">
+  <div class="wrap">
+    <blockquote>The mind creates it. The hand illustrates it.</blockquote>
+    <cite>Arnold Mikelson's guiding idea</cite>
+  </div>
+</section>
+
+<section>
+  <div class="wrap narrow">
+    <h2>Sixty years in a few dates</h2>
+    <ol class="timeline">
+      <li><b>1922</b><p>Arnold Mikelson is born in Rauna, Latvia, the son of a cabinetmaker.</p></li>
+      <li><b>1966</b><p>The Mind &amp; Matter Gallery opens on 16th Avenue in South Surrey.</p></li>
+      <li><b>1973</b><p>The Arnold Mikelson Festival of Arts begins. It runs for forty years.</p></li>
+      <li><b>2015</b><p>Mary publishes her memoir, <i>Mind and Matter: Life with Arnold Mikelson</i>.</p></li>
+      <li><b>2026</b><p>The gallery celebrates sixty years.</p></li>
+    </ol>
+    <div class="actions"><a class="btn" href="arnold.html">Read the full story</a></div>
+  </div>
+</section>
+
+<section class="visit-strip">
+  <div class="wrap">
+    <div>
+      <h2>Come and visit</h2>
+      <div class="facts">
+        <div><b>Open</b>Every day, 12 to 6 pm</div>
+        <div><b>Where</b>13743 16th Avenue, Surrey</div>
+        <div><b>Call</b><a href="tel:+16045366460">604-536-6460</a></div>
+      </div>
+    </div>
+    <div class="actions" style="margin-top:0">
+      <a class="btn solid" href="visit.html">Directions and contact</a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <h2>Mind &amp; Matter Gallery</h2>
+      <p>13743 16th Avenue<br>Surrey, BC V4A 1P7</p>
+      <p>Open every day, 12 to 6 pm</p>
+    </div>
+    <div>
+      <ul>
+        <li><a href="tel:+16045366460">604-536-6460</a></li>
+        <li><a href="mailto:mary@mindandmatterart.com">mary@mindandmatterart.com</a></li>
+        <li><a href="https://www.facebook.com/pages/Arnold-Mikelson-Mind-Matter-Art-Gallery/138500436164524" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><a href="arnold.html">Arnold Mikelson</a></li>
+        <li><a href="gallery.html">The Gallery</a></li>
+        <li><a href="book.html">The Book &amp; News</a></li>
+        <li><a href="visit.html">Visit</a></li>
+      </ul>
+    </div>
+    <p class="note">Demo by Sahan Nonis. Not the official website of Mind &amp; Matter Gallery.</p>
+  </div>
+</footer>
+<dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+  <figure><img alt=""><figcaption></figcaption></figure>
+  <div class="lb-bar"><button data-prev>Previous</button><button data-close>Close</button><button data-next>Next</button></div>
+</dialog>
+<script src="site.js"></script>
+<script type="module" src="carve.js"></script>
+</body>
+</html>
